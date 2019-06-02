@@ -1,0 +1,21 @@
+{
+  "name": "fit",
+  "version": "1.0.0",
+  "description": "Solve linear equations using least squares...",
+  "main": "fit.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "simple": "babel-node --presets @babel/env examples/simple-parabole.js"
+  },
+  "author": "Juan V. Vía",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^5.16.0",
+    "mathjs": "^5.10.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5"
+  }
+}
