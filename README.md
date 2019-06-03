@@ -2,8 +2,7 @@
 
 ## solve.js
 
-
-Returns the vector x in 
+Returns the vector x in
 
 > Ax=b
 >
@@ -19,6 +18,25 @@ using the least squares method, i.e. calculates x from the formula
 
 >x=(A<sup>T</sup>A)<sup>-1</sup>A<sup>T</sup>b
 
+Actually this is the code:
+
+solve.js
+```
+import { multiply, transpose, inv } from 'mathjs'
+
+export default (A,b) => multiply(
+  multiply(
+    inv(
+      multiply(
+        transpose(A),
+        A
+      )
+    ),
+    transpose(A)
+  ),
+  b
+)
+```
 
 ## Usage
 
