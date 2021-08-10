@@ -10,8 +10,8 @@
   "author": "Juan V. Vía",
   "license": "ISC",
   "dependencies": {
-    "eslint": "^5.16.0",
-    "mathjs": "^5.10.3"
+    "eslint": "^7.32.0",
+    "mathjs": "^9.4.4"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
