@@ -131,3 +131,6 @@ typings/
 *.cb
 *.cb2
 .*.lb
+fit.fdb_latexmk
+fit.nav
+fit.synctex.gz
