@@ -1,7 +1,14 @@
-\documentclass{beamer}
 
-\title{Sample Title}
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\title{Least squares}
 \subtitle{Sample Subtitle}
+\author{Juan V. Vía}
+\institute{}
+\date{\today}
 
 %\usetheme{lucid}
 \begin{document}
@@ -9,8 +16,41 @@
 		\titlepage
 	}
 	\frame {
-		\frametitle{Sample Page 1}
-		\[\frac{-b \pm \sqrt{b^2 - c}}{2a}\]
+		\frametitle{Example}
+		\framesubtitle{Showing why least squares}
+		We have a variable $y$. We know that it's dependent of another variable $x$ in some
+		way. But we don't know how, exactly.
+
+		So we go to the field and measure certain points. Those that we can reach. Six of them.
+		$$(2,5),(5,5),(7,8),(11,7),(14,9),(18,7)$$
+
+		That is: on $x=2$ we measure $y=5$, on $x=5$ we measure $y=5$ again, but
+		on $x=7$ we got $y=8$, and so on.
+
+	}
+
+	\frame {
+		\frametitle{Example}
+		\framesubtitle{Showing why least squares}
+		Next step, obviously, is to plot these points.
+
+
+	}
+
+
+	\frame{
+		
+		
+		% \[\frac{-b \pm \sqrt{b^2 - c}}{2a}\]
+
+		\[\begin{bmatrix}
+			2 & 1\\
+			5 & 1\\
+			7 & 1\\
+			11 & 1\\
+			14 & 1\\
+			18 & 1
+		\end{bmatrix}\]
 	}
 	\frame{
 		\frametitle{Sample Page 2}
