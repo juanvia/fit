@@ -1,6 +1,35 @@
 \documentclass{beamer}
 \usepackage{amsmath}
 \usepackage{graphicx}
+
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+
+
 \graphicspath{ {./images/} }
 
 \title{Least squares}
@@ -369,7 +398,7 @@ $$
 \frame {
 	\frametitle{Least squares}
 	\framesubtitle{Recapitulation}
-	
+
 	You have a bunch of data points and suspect that a polinomial function $y=Ax+B$ from this points is a good model.
 
 	You build a matrix $A$ and a vector $b$ from the polinomial and the points.
@@ -377,9 +406,42 @@ $$
 	The polinomial coefficients are a vector $x$ so $Ax=b$
 
 	Then $x=(A^\intercal A)^{-1}A^\intercal b$
-	
+
 
 }
+% -------------------------------------------------------------------------
+\frame {
+	\frametitle{Least squares}
+	\framesubtitle{Don't worry, its XXI century}
+
+	So the solution is calculate $x=(A^\intercal A)^{-1}A^\intercal b$
+
+	But you don't need to do this by hand like Gauss did.
+
+	See the code, in this case Javascript code
+
+
+}
+% -------------------------------------------------------------------------
+\begin{frame}[fragile]
+\begin{lstlisting}
+const { multiply, transpose, inv, matrix, format } = require( "mathjs")
+
+const solve = (A, b) => {
+	const transposed    = transpose(A)
+	const product       = multiply(transposed, A)
+	const inverse       = inv(product)
+	const pseudoInverse = multiply(inverse,transposed)
+	const x             = multiply(pseudoInverse, b)
+	return x
+}
+
+const A = matrix([[2,1],[5,1],[7,1],[11,1],[14,1],[18,1]])
+const b = matrix([5,5,8,7,9,7]);
+
+console.log(format(solve(A, b),5))
+\end{lstlisting}
+\end{frame}
 % -------------------------------------------------------------------------
 \frame {
 	\frametitle{Least squares}
@@ -390,8 +452,8 @@ $$
 	A line in a plane is a polinomial function where $y$ (the dependent variable, a real number) is a
 	function of $x$ (the independent variable, a real number)
 	$$
-	y \colon \mathbb{R} \to \mathbb{R} = Ax + B
-	$$ 
+		y \colon \mathbb{R} \to \mathbb{R} = Ax + B
+	$$
 
 }
 % -------------------------------------------------------------------------
