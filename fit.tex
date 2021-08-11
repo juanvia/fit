@@ -366,4 +366,35 @@ $$
 	\includegraphics[width=8cm]{line}
 }
 % -------------------------------------------------------------------------
+\frame {
+	\frametitle{Least squares}
+	\framesubtitle{Recapitulation}
+	
+	You have a bunch of data points
+
+	You decide derive a polinomial function $y=Ax+B$ from this points.
+
+	You build a matrix $A$ and a vector $b$ from the polinomial and the points.
+
+	The polinomial coefficients are a vector $x$ so $Ax=b$
+
+	Then $x=(A^\intercal A)^{-1}A^\intercal b$
+	
+
+}
+% -------------------------------------------------------------------------
+\frame {
+	\frametitle{Least squares}
+	\framesubtitle{The polinomial function}
+
+	In the example we picked a line for regression.
+
+	A line in a plane is a polinomial function where $y$ (the dependent variable, a real number) is a
+	function of $x$ (the independent variable, a real number)
+	$$
+	y \colon \mathbb{R} \to \mathbb{R} = Ax + B
+	$$ 
+
+}
+% -------------------------------------------------------------------------
 \end{document}
