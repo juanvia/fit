@@ -219,54 +219,54 @@
 \frame {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
-	
+
 	All start with our equation $Ax=b$.
 
-	
+
 }
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 \frame {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
-	
+
 	Take $A$,
 	$$
-	A= \begin{bmatrix} 2  & 1 \\
-		5  & 1 \\
-		7  & 1 \\
-		11 & 1 \\
-		14 & 1 \\
-		18 & 1
-\end{bmatrix}
+		A= \begin{bmatrix} 2  & 1 \\
+                5  & 1 \\
+                7  & 1 \\
+                11 & 1 \\
+                14 & 1 \\
+                18 & 1
+		\end{bmatrix}
 	$$
- transpose it.
-$$
-A^\intercal=\begin{bmatrix} 2  & 5 & 7 & 11 & 14 & 18\\
-	1 & 1 & 1 &1 & 1 & 1
-\end{bmatrix}
-$$
+	transpose it.
+	$$
+		A^\intercal=\begin{bmatrix} 2 & 5 & 7 & 11 & 14 & 18 \\
+                1 & 1 & 1 & 1  & 1  & 1
+		\end{bmatrix}
+	$$
 }
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 \frame {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
-	
+
 	Multiply $A^\intercal$ by $A$
 
 	$$
-	A^\intercal A = \begin{bmatrix} 2  & 5 & 7 & 11 & 14 & 18\\
-		1 & 1 & 1 &1 & 1 & 1
-	\end{bmatrix} \begin{bmatrix} 2  & 1 \\
-		5  & 1 \\
-		7  & 1 \\
-		11 & 1 \\
-		14 & 1 \\
-		18 & 1
-\end{bmatrix} = \begin{bmatrix} 719  & 57 \\
-	57  & 6 
-\end{bmatrix}
+		A^\intercal A = \begin{bmatrix} 2 & 5 & 7 & 11 & 14 & 18 \\
+                1 & 1 & 1 & 1  & 1  & 1
+		\end{bmatrix} \begin{bmatrix} 2  & 1 \\
+                5  & 1 \\
+                7  & 1 \\
+                11 & 1 \\
+                14 & 1 \\
+                18 & 1
+		\end{bmatrix} = \begin{bmatrix} 719 & 57 \\
+                57  & 6
+		\end{bmatrix}
 	$$
 
 
@@ -275,10 +275,17 @@ $$
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 \frame {
-	\frametitle{Example}
-	\framesubtitle{Showing why least squares}
-	
-	All start with our equation $Ax=b$.
+\frametitle{Example}
+\framesubtitle{Showing why least squares}
+
+Invert the product
+$$
+	(A^\intercal A)^{-1} = \begin{bmatrix} 719 & 57 \\
+                57  & 6
+	\end{bmatrix}^{-1} = \begin{bmatrix} \frac{2}{355}   & -\frac{19}{355}  \\
+                -\frac{19}{355} & \frac{719}{1065}
+	\end{bmatrix}
+$$
 
 
 }
@@ -287,9 +294,22 @@ $$
 \frame {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
-	
-	All start with our equation $Ax=b$.
 
+	Multiply inverse and transpose
+	$$
+		(A^\intercal A)^{-1}A^\intercal = \begin{bmatrix} \frac{2}{355}   & -\frac{19}{355}  \\
+                -\frac{19}{355} & \frac{719}{1065}
+		\end{bmatrix}\begin{bmatrix} 2 & 5 & 7 & 11 & 14 & 18 \\
+                1 & 1 & 1 & 1  & 1  & 1
+		\end{bmatrix}
+	$$
+	$$
+		= \begin{bmatrix} -\frac{3}{71}   & -\frac{9}{355}   & -\frac{1}{71}  & \frac{3}{355}   & \frac{9}{355}    & \frac{17}{355}    \\
+                \frac{121}{213} & \frac{434}{1065} & \frac{64}{213} & \frac{92}{1065} & -\frac{79}{1065} & -\frac{307}{1065}
+		\end{bmatrix}
+	$$
+
+	Let's call this product $(A^\intercal A)^{-1}A^\intercal$ the \textit{pseudo-inverse}
 
 }
 % -------------------------------------------------------------------------
@@ -297,10 +317,53 @@ $$
 \frame {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
-	
-	All start with our equation $Ax=b$.
 
+	Finally multiply the pseudo-inverse by $b$
 
+	$$x = \begin{bmatrix} -\frac{3}{71}   & -\frac{9}{355}   & -\frac{1}{71}  & \frac{3}{355}   & \frac{9}{355}    & \frac{17}{355}    \\
+                \frac{121}{213} & \frac{434}{1065} & \frac{64}{213} & \frac{92}{1065} & -\frac{79}{1065} & -\frac{307}{1065}
+		\end{bmatrix}\begin{bmatrix}
+			5 \\
+			5 \\
+			8 \\
+			7 \\
+			9 \\
+			7
+		\end{bmatrix} = \begin{bmatrix}
+			\frac{61}{355} \\
+			\frac{5539}{1065}
+		\end{bmatrix}
+	$$
+
+}
+% -------------------------------------------------------------------------
+\frame {
+	\frametitle{Example}
+	\framesubtitle{Showing why least squares}
+
+	That's it
+	$$x = \begin{bmatrix}
+			m \\
+			b
+		\end{bmatrix} = \begin{bmatrix}
+			\frac{61}{355} \\
+			\frac{5539}{1065}
+		\end{bmatrix} \textnormal{or} \begin{bmatrix}
+			0.171831 \\
+			5.20094
+		\end{bmatrix}
+	$$
+	and $m=0.171831$ and $b=5.20094$ and the line is
+	$$
+		y = 0.171831x+5.20094
+	$$
+}
+% -------------------------------------------------------------------------
+\frame {
+	\frametitle{Example}
+	\framesubtitle{Showing why least squares}
+	And the best fit is
+	\includegraphics[width=8cm]{line}
 }
 % -------------------------------------------------------------------------
 \end{document}
