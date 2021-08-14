@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "eslint": "^7.32.0",
-    "mathjs": "^9.4.4"
+    "mathjs": "^9.4.4",
+    "ramda": "^0.27.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
