@@ -1,17 +1,7 @@
-\begin{lstlisting}
-const { multiply, transpose, inv, matrix, format } = require( "mathjs")
-
-const solve = (A, b) => {
-	const transposed    = transpose(A)
-	const product       = multiply(transposed, A)
-	const inverse       = inv(product)
-	const pseudoInverse = multiply(inverse,transposed)
-	const x             = multiply(pseudoInverse, b)
-	return x
-}
-
-const A = matrix([[2,1],[5,1],[7,1],[11,1],[14,1],[18,1]])
-const b = matrix([5,5,8,7,9,7]);
-
-console.log(format(solve(A, b),5))
-\end{lstlisting}
+\frametitle{Least squares}
+	\framesubtitle{The polynomial function}
+	Get a terminal and do the magic
+	\begin{lstlisting}
+		$ node ls.js
+		[0.17183, 5.2009]
+	\end{lstlisting}

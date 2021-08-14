@@ -41,11 +41,11 @@
 %\usetheme{lucid}
 \begin{document}
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\titlepage
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 	We have a variable $y$. We know that it's dependent of another variable $x$ in some
@@ -58,51 +58,70 @@
 	at $x=7$ we got $y=8$, and so on.
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
-	Next step, obviously, is to plot these points.
+	Back to desk we plot these points.
 	\includegraphics[width=8cm]{points}
+
+	There is a model lurking in these points? A line perhaps?
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 	Let's start by tracing a line wich "best fit" that data
+
 	\includegraphics[width=8cm]{points}
+
+	Why a line? To warm the modeling machine in our minds we are considering a line,
+	a one degree polynomial.
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
-	What line? How to choose that line?
+	What line to plot? How to choose that line?
+
 	\includegraphics[width=8cm]{points}
+
+	Enter the math...
+
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
-	A very common way to express a line is using the equation (a polinomial function)
+	A very common way to express a line in the plane is
+	% using the slope-intercept form in the cartesian plane 
+	% (
+	isolating
+	$y$ as a polynomial function of $x$:
+	% )
 	$$
-		y = mx +b
+		y = mx + b
 	$$
 
-	Using vector notation:
+	From this equation we can see that $m$ is the \textit{slope} of the line and $b$ is
+	the \textit{y-intercept} (the value of $y$ when $x=0$).
+	\medskip
+
+	Will be handy for us to write this equation using vector notation:
 	$$y=
 		\begin{bmatrix} x & 1 \end{bmatrix}
 		\begin{bmatrix} m\\ b \end{bmatrix}$$
 
-	Or, switching terms:
+	And switching terms:
 	$$\begin{bmatrix} x & 1 \end{bmatrix}
 		\begin{bmatrix} m\\ b \end{bmatrix}=y$$
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
-	Ok. Fine. That's it. This form
+	Ok. Fine. This form
 	$$\begin{bmatrix} x & 1 \end{bmatrix}
 		\begin{bmatrix} m\\ b \end{bmatrix}=y$$
 	will be a useful one because we know $x$ and $y$ in six points.
@@ -111,7 +130,7 @@
 		\begin{bmatrix} m\\ b \end{bmatrix}=5$$
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
@@ -120,14 +139,63 @@
                 5 & 1\end{bmatrix}
 		\begin{bmatrix} m\\ b \end{bmatrix}=\begin{bmatrix} 5\\ 5 \end{bmatrix}$$
 
-	...and the third point...and the fourth...
+	Doing the product you can workout $m$ and $b$ from this equation. $m=0$ and $b=5$.
+	Because the matrix is square. And invertible by the way.
+
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
-	Reaching the end this is the result
+	Going further, incorporate the third point.
+	$$
+		\begin{bmatrix} 2 & 1 \\
+                5 & 1 \\
+                7 & 1\end{bmatrix}
+		\begin{bmatrix} m\\ b \end{bmatrix}=\begin{bmatrix} 5\\ 5 \\ 8 \end{bmatrix}
+	$$
+	This invalidate the previous result. $m$ cannot be $0$ more. Neither $b$ with $5$.
+
+	Actually, henceforth the equation is over-determined and have no solution.
+
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Example}
+	\framesubtitle{Showing why least squares}
+
+	Fourth point.
+	$$
+		\begin{bmatrix} 2  & 1 \\
+                5  & 1 \\
+                7  & 1 \\
+                11 & 1\end{bmatrix}
+		\begin{bmatrix} m\\ b \end{bmatrix}=\begin{bmatrix} 5\\ 5 \\ 8 \\ 7\end{bmatrix}
+	$$
+
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Example}
+	\framesubtitle{Showing why least squares}
+
+	Fifth point.
+	$$
+		\begin{bmatrix} 2  & 1 \\
+                5  & 1 \\
+                7  & 1 \\
+                11 & 1 \\
+                14 & 1\end{bmatrix}
+		\begin{bmatrix} m\\ b \end{bmatrix}=\begin{bmatrix} 5\\ 5 \\ 8 \\ 7 \\ 9\end{bmatrix}
+	$$
+
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Example}
+	\framesubtitle{Showing why least squares}
+	Sixth and last point.
 	$$\begin{bmatrix} 2  & 1 \\
                 5  & 1 \\
                 7  & 1 \\
@@ -143,9 +211,10 @@
 			9 \\
 			7
 		\end{bmatrix}$$
+	This is the equation derived from our measurement.
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
@@ -153,7 +222,7 @@
 
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
@@ -167,14 +236,14 @@
 		\end{bmatrix}$$
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
 	Call $x$ to the column vector	$$x=\begin{bmatrix} m\\ b \end{bmatrix}$$
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
@@ -188,7 +257,7 @@
 		\end{bmatrix}$$
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
@@ -212,40 +281,97 @@
 	$$ Ax=b $$
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
 	In other words: if you want to know the values $m$ and $b$ in the equation
-	$ y = mx + b $ of the line we are searching find the $x$ such that $Ax=b$, but\dots
+	$ y = mx + b $ of the line we are searching find the $x$ such $Ax=b$.
 
-	\dots that equation have no solution!\dots
 
-	...because the matrix A is tall, so $Ax=b$ is over-determined, there are more equations (m)
-	than variables to choose. There is no $x$ such that the norm of the difference between Ax and b equals zero
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Example}
+	\framesubtitle{Showing why least squares}
+
+	In other words: if you want to know the values $m$ and $b$ in the equation
+	$ y = mx + b $ of the line we are searching find the $x$ such $Ax=b$,  but
+	\textbf{that equation have no solution!}
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Example}
+	\framesubtitle{Showing why least squares}
+
+	In other words: if you want to know the values $m$ and $b$ in the equation
+	$ y = mx + b $ of the line we are searching find the $x$ such $Ax=b$, but
+	\textbf{that equation have no solution!}
+	because the matrix A is tall, so $Ax=b$ is over-determined,
+	there are more equations than variables to choose.
+	There is no $x$ such
+	the norm of the difference between Ax and b equals zero
 
 	$$
 		\left\lVert Ax-b\right\rVert \neq 0
 	$$
 
+
+}
+% -------------------------------------------------------------------------
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Example}
+	\framesubtitle{Showing why least squares}
+
+	In other words: if you want to know the values $m$ and $b$ in the equation
+	$ y = mx + b $ of the line we are searching find the $x$ such $Ax=b$, but
+	\textbf{that equation have no solution!}
+	because the matrix A is tall, so $Ax=b$ is over-determined,
+	there are more equations than variables to choose.
+	There is no $x$ such
+	the norm of the difference between Ax and b equals zero
+	$$
+		\left\lVert Ax-b\right\rVert \neq 0
+	$$
 	\textbf{We need the least squares approximate solution}
 
 
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 	In the least squares approximate solution of $Ax=b$ we, provided that $\left\lVert Ax-b\right\rVert \neq 0$,
-	select $x$ that the \textit{norm} of the \textit{residual} $r=Ax-b$ be minimal.
+	select $x$ that the \textit{norm} of the \textit{residual} $r=Ax-b$ is minimal.
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Example}
+	\framesubtitle{Showing why least squares}
+	In the least squares approximate solution of $Ax=b$ we, provided that $\left\lVert Ax-b\right\rVert \neq 0$,
+	select $x$ that the \textit{norm} of the \textit{residual} $r=Ax-b$ is minimal.
 
-	It's all here: http://vmls-book.stanford.edu/ and in many other sources. The least squares
+	\medskip
+	It's all there: http://vmls-book.stanford.edu/ and in many other sources. The least squares
+	approximate solution is very known.
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Example}
+	\framesubtitle{Showing why least squares}
+	In the least squares approximate solution of $Ax=b$ we, provided that $\left\lVert Ax-b\right\rVert \neq 0$,
+	select $x$ that the \textit{norm} of the \textit{residual} $r=Ax-b$ is minimal.
+
+	\medskip
+	It's all there: http://vmls-book.stanford.edu/ and in many other sources. The least squares
 	approximate solution is very known.
 
+	\medskip
 	Let's see it.
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
@@ -254,12 +380,11 @@
 
 }
 % -------------------------------------------------------------------------
-% -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
-	Take $A$,
+	Take the original matrix $A$:
 	$$
 		A= \begin{bmatrix} 2  & 1 \\
                 5  & 1 \\
@@ -269,16 +394,34 @@
                 18 & 1
 		\end{bmatrix}
 	$$
-	transpose it.
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Example}
+	\framesubtitle{Showing why least squares}
+
+	Take the original matrix $A$:
+	$$
+		A= \begin{bmatrix} 2  & 1 \\
+                5  & 1 \\
+                7  & 1 \\
+                11 & 1 \\
+                14 & 1 \\
+                18 & 1
+		\end{bmatrix}
+	$$
+	Transpose it, and get $A^\intercal$:
+
 	$$
 		A^\intercal=\begin{bmatrix} 2 & 5 & 7 & 11 & 14 & 18 \\
                 1 & 1 & 1 & 1  & 1  & 1
 		\end{bmatrix}
 	$$
+
+	% Reserve $A^\intercal$ for later use.
 }
 % -------------------------------------------------------------------------
-% -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
@@ -303,7 +446,7 @@
 }
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 \frametitle{Example}
 \framesubtitle{Showing why least squares}
 
@@ -320,7 +463,7 @@ $$
 }
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
@@ -343,30 +486,46 @@ $$
 }
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
 	Finally multiply the pseudo-inverse by $b$
+	% \begin{align}
+	% 	u  & = \arctan x           & dv & = 1 \, dx \\
+	% 	du & = \frac{1}{1 + x^2}dx & v  & = x.
+	% \end{align}
+	% \begin{align}
+	% 		x^2 + y^2 & = 1               \\
+	% 		y         & = \sqrt{1 - x^2}.
+	% 	\end{align}$$
 
-	$$x = \begin{bmatrix} -\frac{3}{71}   & -\frac{9}{355}   & -\frac{1}{71}  & \frac{3}{355}   & \frac{9}{355}    & \frac{17}{355}    \\
-                \frac{121}{213} & \frac{434}{1065} & \frac{64}{213} & \frac{92}{1065} & -\frac{79}{1065} & -\frac{307}{1065}
-		\end{bmatrix}\begin{bmatrix}
+	\begin{align}
+		x              & = (A^\intercal A)^{-1}A^\intercal b \\
+		\textnormal{ } & = \begin{bmatrix}
+			-\frac{3}{71}   & -\frac{9}{355}   & -\frac{1}{71}  & \frac{3}{355}   & \frac{9}{355}    & \frac{17}{355}    \\
+			\frac{121}{213} & \frac{434}{1065} & \frac{64}{213} & \frac{92}{1065} & -\frac{79}{1065} & -\frac{307}{1065}
+		\end{bmatrix}
+		\begin{bmatrix}
 			5 \\
 			5 \\
 			8 \\
 			7 \\
 			9 \\
 			7
-		\end{bmatrix} = \begin{bmatrix}
+		\end{bmatrix}                           \\
+		\textnormal{ } & = \begin{bmatrix}
 			\frac{61}{355} \\
 			\frac{5539}{1065}
+		\end{bmatrix}        \\
+		\textnormal{ } & = \begin{bmatrix}
+			0.171831 \\
+			5.20094
 		\end{bmatrix}
-	$$
-
+	\end{align}
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 
@@ -382,49 +541,56 @@ $$
 			5.20094
 		\end{bmatrix}
 	$$
-	and $m=0.171831$ and $b=5.20094$ and the line is
+
+	and $m=0.171831$
+
+	and $b=5.20094$
+
+	and the line is
 	$$
 		y = 0.171831x+5.20094
 	$$
+
+	and \textbf{that} is the line which \textbf{best fit} our data points.
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Example}
 	\framesubtitle{Showing why least squares}
 	And the best fit is
 	\includegraphics[width=8cm]{line}
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Least squares}
 	\framesubtitle{Recapitulation}
 
-	You have a bunch of data points and suspect that a polinomial function $y=Ax+B$ from this points is a good model.
+	You have a bunch of data points and suspect that a polynomial function $y=Ax+B$ from this points is a good model.
 
-	You build a matrix $A$ and a vector $b$ from the polinomial and the points.
+	You build a matrix $A$ and a vector $b$ from the polynomial and the points.
 
-	The polinomial coefficients are a vector $x$ so $Ax=b$
+	The polynomial coefficients are a vector $x$ so $Ax=b$
 
 	Then $x=(A^\intercal A)^{-1}A^\intercal b$
 
 
 }
 % -------------------------------------------------------------------------
-\frame {
+\frame[t] {
 	\frametitle{Least squares}
 	\framesubtitle{Don't worry, its XXI century}
 
-	So the solution is calculate $x=(A^\intercal A)^{-1}A^\intercal b$
+	So the key is calculate $x=(A^\intercal A)^{-1}A^\intercal b$.
 
 	But you don't need to do this by hand like Gauss did.
 
-	See the code, in this case Javascript code
+	See the code, in this case Javascript code, using the mathjs package.
 
 
 }
 % -------------------------------------------------------------------------
 \begin{frame}[fragile]
-\begin{lstlisting}
+	\begin{lstlisting}
 const { multiply, transpose, inv, matrix, format } = require( "mathjs")
 
 const solve = (A, b) => {
@@ -437,23 +603,96 @@ const solve = (A, b) => {
 }
 
 const A = matrix([[2,1],[5,1],[7,1],[11,1],[14,1],[18,1]])
-const b = matrix([5,5,8,7,9,7]);
+const b = matrix([5,5,8,7,9,7])
 
 console.log(format(solve(A, b),5))
 \end{lstlisting}
 \end{frame}
 % -------------------------------------------------------------------------
-\frame {
+\begin{frame}[fragile,t]
 	\frametitle{Least squares}
-	\framesubtitle{The polinomial function}
+	\framesubtitle{The polynomial function}
+	Get a terminal and do the magic
+\end{frame}
+% -------------------------------------------------------------------------
+\begin{frame}[fragile,t]
+	\frametitle{Least squares}
+	\framesubtitle{The polynomial function}
+	Get a terminal and do the magic
+	\begin{lstlisting}
+		$ node ls.js
+		[0.17183, 5.2009]
+	\end{lstlisting}
+\end{frame}
+
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Going further}
+	Mind blowing is coming
+
+	To avert catastrophic damage in our brains it's time to rename things
+
+	In the example we found a line $y=mx+b$, now:
+
+	$m$ becomes $a_1$
+
+	$b$ becomes $a_0$
+
+	$x$ becomes $x_1$
+
+	$y$ remains the same
+
+	The found line, then, becomes
+
+	$$
+		y=a_1x_1+a_0=0.17183x_1+5.2009
+	$$
+
+	\textbf{Nothing has changed}, only the names.
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{The polynomial function}
 
 	In the example we picked a line for regression.
 
-	A line in a plane is a polinomial function where $y$ (the dependent variable, a real number) is a
-	function of $x$ (the independent variable, a real number)
+	A line in a plane can be expressed as a polynomial function $P(x_1)$ where $y$ (the dependent variable, a real number) is a
+	function of $x_1$ (the independent variable, a real number)
 	$$
-		y \colon \mathbb{R} \to \mathbb{R} = Ax + B
+		y \colon \mathbb{R} \to \mathbb{R} = P(x_1) = a_1x_1 + a_0
 	$$
+
+	But there are others $P(x_1)$s, for example:
+
+	$$
+		y \colon \mathbb{R} \to \mathbb{R} = P(x_1) = a_2x_1^2 + a_1x_1 + a_0
+	$$
+
+	What about using that quadratic function as the model for the measured points?
+	
+	\bigskip
+
+	Let's see...
+
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{A curve as a model}
+
+	That is the curve:
+	$$
+		y = a_2x_1^2 + a_1x_1 + a_0
+	$$
+
+	And those are the points:
+	$$(2,5),(5,5),(7,8),(11,7),(14,9),(18,7)$$
+
+	Replacing $x_1$ and $y$ in each point
+
+
 
 }
 % -------------------------------------------------------------------------
