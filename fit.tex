@@ -671,7 +671,7 @@ console.log(format(solve(A, b),5))
 	$$
 
 	What about using that quadratic function as the model for the measured points?
-	
+
 	\bigskip
 
 	Let's see...
@@ -690,13 +690,259 @@ console.log(format(solve(A, b),5))
 	And those are the points:
 	$(2,5),(5,5),(7,8),(11,7),(14,9),(18,7)$
 
-	Replacing $x_1$ and $y$ in each point, and switching terms:
+	Replacing $x_1$ and $y$ in each point, and rearranging:
+
+	\begin{align}
+		4a_2   & +  2a_1 & + a_0 & = 5 \\
+		25a_2  & +  5a_1 & + a_0 & = 5 \\
+		49a_2  & +  7a_1 & + a_0 & = 8 \\
+		121a_2 & + 11a_1 & + a_0 & = 7 \\
+		196a_2 & + 14a_1 & + a_0 & = 9 \\
+		324a_2 & + 18a_1 & + a_0 & = 7
+	\end{align}
+
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{A curve as a model}
+	The curve:
+	$
+		y = a_2x_1^2 + a_1x_1 + a_0
+	$
+
+	In matrix form:
 	$$
-	a_2x_1^2 + a_1x_1 + a_0 = 5
+		\begin{bmatrix}
+			4   & 2  & 1 \\
+			25  & 5  & 1 \\
+			49  & 7  & 1 \\
+			121 & 11 & 1 \\
+			196 & 14 & 1 \\
+			324 & 18 & 1
+		\end{bmatrix} \begin{bmatrix}
+			a_2 \\
+			a_1 \\
+			a_0
+		\end{bmatrix} = \begin{bmatrix}
+			5 \\
+			5 \\
+			8 \\
+			7 \\
+			9 \\
+			7
+		\end{bmatrix}
 	$$
+
+	In this case
+	$$x = \begin{bmatrix}
+			-0.028205 \\
+			0.73633   \\
+			3.2181\end{bmatrix}$$
+
+	and the curve is $y=-0.028205x_1^2+0.73633x_1+3.2181$
+}
+
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Adding one dimension}
+
+	Until now we were working with polynomials whis one independent variable ($x_1$)
+	and one dependent variable ($y$)
+
+	$$
+		y \colon \mathbb{R} \to \mathbb{R} = P(x_1)
+	$$
+
+	What about a polynomial with two independent variables?
+
+	Nothing, the least squares method stays the same. Note that is all about
+	finding coefficients. So for example take
+
+	$$
+		y \colon \mathbb{R}^2 \to \mathbb{R} = P(x_1, x_2)
+	$$
+
+	where
+
+	$$
+		y=a_5x_1^2+a_4x_2^2+a_3x_1x_2+a_2x_1+a_1x_2+a_0
+	$$
+
+
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Adding one dimension}
+
+	That function ($y=a_5x_1^2+a_4x_2^2+a_3x_1x_2+a_2x_1+a_1x_2+a_0$)
+	is useful when you need a model to represent height at a certain
+	point given with two coordinates $(x_1,x_2)$.
+
+	In this case we are looking for six coefficients
+
+
+	$$
+		x=\begin{bmatrix}
+			a_5 \\
+			a_4 \\
+			a_3 \\
+			a_2 \\
+			a_1 \\
+			a_0
+		\end{bmatrix}
+	$$
+
+	so we need at least six
+	points $(x_1,x_2,y)$ to uniquely determinate those coefficients.
 
 
 
 }
 % -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Adding one dimension}
+	If you
+	have more points than six you form the matrix A, form the vector b as usual,
+	and resolve x using the least squares approximate solution:
+	$$
+		x=(A^\intercal A)^{-1}A^\intercal b
+	$$
+
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Multidimensional input}
+
+	Of course you can extend the application of least squares to problems where
+	the input have more than two dimension
+	$$
+		y \colon \mathbb{R}^n \to \mathbb{R} = P(x_1, x_2, \dots , x_n)
+	$$
+
+	Take for example a set of measured temperatures in certain points (ten or more) $(x_1,x_2,x_3,t)$ in the interior
+	of a body. If we want a quadratic model then the polynomial will be:
+	\begin{align}
+		y              & = f(x_1 , x_2 , x_3):\mathbb{R}^3 \to \mathbb{R}           \\
+		y              & = a_9x_1^2 + a_8x_2^2 + a_7x_3^2 + a_6x_1x_2 + a_5x_1x_3 + \\
+		\textnormal{ } & a_4x_2x_3 + a_3x_1 + a_2x_2 + a_1x_3 + a_0
+	\end{align}
+
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Multidimensional input}
+
+	Take the measurements, build the matrix $A$ evaluating $x_1, x_2, x_3$, their
+	products and their squares, build the column vector $b$ evaluating $y$.
+	Be aware that $x$ (in $Ax=b$) will be
+	$$
+		x = \begin{bmatrix}
+			a_9 \\
+			a_8 \\
+			a_7 \\
+			a_6 \\
+			a_5 \\
+			a_4 \\
+			a_3 \\
+			a_2 \\
+			a_1 \\
+			a_0
+		\end{bmatrix}
+	$$
+	evaluate
+	$
+		x=(A^\intercal A)^{-1}A^\intercal b
+	$
+	and you are done.
+
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Multidimensional output}
+	What about $\mathbb{R}^n \to \mathbb{R}^m$?
+
+	\medskip
+
+	Almost the same, with certain precautions.
+
+	\medskip
+
+	Take the case of  $y:\mathbb{R}^3 \to \mathbb{R}^3$
+
+	where \begin{align}
+		y_1 & : \mathbb{R}^3 \to \mathbb{R} = P_1(x_1,x_2,x_3) \\
+		y_2 & : \mathbb{R}^3 \to \mathbb{R} = P_2(x_1,x_2,x_3) \\
+		y_3 & : \mathbb{R}^3 \to \mathbb{R} = P_3(x_1,x_2,x_3)
+	\end{align}
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Multidimensional output}
+	We can isolate and resolve each function e.g.,
+	taking the first coordinate of $y (y_1)$ :
+
+	\medskip
+
+	from the measurements and the selected polynomial model form the matrix $A_1$ so:
+	$$
+		A_1x=b_1
+	$$
+	$$
+		x=(A_1^\intercal A_1)^{-1}A_1^\intercal b_1
+	$$
+	$x$ here denotes $\begin{bmatrix}
+			a_{11} & a_{21} & \dots & a_{n1}
+		\end{bmatrix}^T$ (the second subscript indicates that those are
+	the coefficients of $P_1$, the polynomial of $y_1$)
+
+	\medskip
+
+	Doing the same for $y_2$ and $y_3$ the model
+	for the transformation $y:\mathbb{R}^3 \to \mathbb{R}^3$ is complete.
+
+	But these results came from isolated functions. What if I want a least squares
+	solution for the transformation as a whole?
+
+	Let's see it.
+
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Multidimensional output}
+
+	What if I want a least squares
+	solution for the transformation as a whole?
+
+	Instead of calculate
+	$$
+		(A_1^\intercal A_1)^{-1}A_1^\intercal b_1 \textnormal{ for } P_1
+	$$
+	$$
+		(A_2^\intercal A_2)^{-1}A_2^\intercal b_2 \textnormal{ for } P_2
+	$$
+	$$
+		(A_3^\intercal A_3)^{-1}A_3^\intercal b_3 \textnormal{ for } P_3
+	$$
+	We cant integrate the evaluation of the column vector $x$ 
+	(the coefficients) using the following calculation:
+
+	$$
+	x=(A_1^TA_1+A_2^TA_2+A_3^TA_3)^{-1}(A_1^Tb_1+A_2^Tb_2+A_3^Tb_3)
+	$$
+
+	\textbf{And that is the way to map, for example, from one color to another
+	given a set of example points.}
+
+}
+% -------------------------------------------------------------------------
 \end{document}
+
