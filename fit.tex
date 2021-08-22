@@ -112,6 +112,9 @@
 		\begin{bmatrix} x & 1 \end{bmatrix}
 		\begin{bmatrix} m\\ b \end{bmatrix}$$
 
+	
+
+
 	And switching terms:
 	$$\begin{bmatrix} x & 1 \end{bmatrix}
 		\begin{bmatrix} m\\ b \end{bmatrix}=y$$
@@ -932,16 +935,84 @@ console.log(format(solve(A, b),5))
 	$$
 		(A_3^\intercal A_3)^{-1}A_3^\intercal b_3 \textnormal{ for } P_3
 	$$
-	We can integrate the evaluation of the column vector $x$ 
+	We can integrate the evaluation of the column vector $x$
 	(the coefficients) using the following calculation:
 
 	$$
-	x=(A_1^TA_1+A_2^TA_2+A_3^TA_3)^{-1}(A_1^Tb_1+A_2^Tb_2+A_3^Tb_3)
+		x=(A_1^TA_1+A_2^TA_2+A_3^TA_3)^{-1}(A_1^Tb_1+A_2^Tb_2+A_3^Tb_3)
 	$$
 
 	\textbf{And that is the way to map, for example, from one color set to another
-	given a set of example points.}
+		given a set of example points.}
 
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Color (RGB) regression application}
+
+	This section is about an application of least squares
+	to the generation of a color palette from another on base a one set of example transformations.
+
+	\medskip
+
+	In this scenario we have a palette, a set of colors, and a
+	bunch of examples of how to change them to another palette.
+
+	\medskip
+
+	Each example takes a color, specified by its components	(\textit{red}, \textit{green}, \textit{blue}) let's name it
+	$u$ (after \textit{u}rigin) and produces anoter color $v$ (from \textit{v}estiny). So
+
+	\medskip
+
+	$$
+		v
+		=\begin{bmatrix}v_R \\ v_G \\ v_B\end{bmatrix}
+		=f(u):\mathbb{R}^3 \to \mathbb{R}^3
+		=f\left(\begin{bmatrix} u_R \\ u_G \\ u_B \end{bmatrix}\right)
+	$$
+
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Error en el tramo 20:32-20:37}
+
+	Un polinomio en notación sumatoria se expresa:
+	$
+	\sum_{i=0}^{n} a_ix^i  
+	$
+	que es la suma del coeficiente por la potencia de la indeterminada
+
+	\medskip
+
+	Ejemplos:
+
+	\medskip
+
+	Un polinomio cúbico: $ a_3x^3+a_2x^2+a_1x^1+a_0x^0 $
+	
+	Un polinomio cuadrático: $ a_2x^2+a_1x^1+a_0x^0 $
+	
+	Un polinomio lineal: $a_1x^1+a_0x^0 $
+
+	En vez de $x^1$ decimos $x$ y en vez de $x^0$ decimos $1$
+	Como $a_0.1 = a_0$ no lo escribimos y decimos que el polinomio
+	lineal es $a_1x+a_0$  
+	
+	\medskip
+
+	Pero, cuando lo pasamos a forma vectorial:
+
+	$$y=a_1x^1+a_0x^0 = 
+		\begin{bmatrix} x^1 & x^0 \end{bmatrix}
+		\begin{bmatrix} a_1\\ a_0 \end{bmatrix}
+		=
+		\begin{bmatrix} x & 1 \end{bmatrix}
+		\begin{bmatrix} a_1\\ a_0 \end{bmatrix}
+	$$
+	
 }
 % -------------------------------------------------------------------------
 \end{document}
