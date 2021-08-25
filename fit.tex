@@ -1,7 +1,7 @@
 \documentclass{beamer}
 \usepackage{amsmath}
 \usepackage{graphicx}
-
+\usepackage{wrapfig}
 
 \usepackage{listings}
 \usepackage{xcolor}
@@ -112,7 +112,7 @@
 		\begin{bmatrix} x & 1 \end{bmatrix}
 		\begin{bmatrix} m\\ b \end{bmatrix}$$
 
-	
+
 
 
 	And switching terms:
@@ -952,67 +952,136 @@ console.log(format(solve(A, b),5))
 	\framesubtitle{Color (RGB) regression application}
 
 	This section is about an application of least squares
-	to the generation of a color palette from another on base a one set of example transformations.
+	to the color transformation.
 
 	\medskip
 
-	In this scenario we have a palette, a set of colors, and a
-	bunch of examples of how to change them to another palette.
+	In this scenario we have a bunch of examples of how to change
+	a color to another color and expect from them to derive a mathematical
+	function (a polynomial specifically) useful to automatically make these
+	changes.
 
 	\medskip
 
-	Each example takes a color, specified by its components	(\textit{red}, \textit{green}, \textit{blue}) let's name it
-	$u$ (after \textit{u}rigin) and produces anoter color $v$ (from \textit{v}estiny). So
+	But ¿what is, for us, for now, a color?
 
 	\medskip
 
-	$$
-		v
-		=\begin{bmatrix}v_R \\ v_G \\ v_B\end{bmatrix}
-		=f(u):\mathbb{R}^3 \to \mathbb{R}^3
-		=f\left(\begin{bmatrix} u_R \\ u_G \\ u_B \end{bmatrix}\right)
-	$$
+	Ok. We need some background to build.
+
 
 }
 % -------------------------------------------------------------------------
 \frame[t] {
 	\frametitle{Least squares}
-	\framesubtitle{Error en el tramo 20:32-20:37}
+	\framesubtitle{Color (RGB) regression application}
 
-	Un polinomio en notación sumatoria se expresa:
-	$
-	\sum_{i=0}^{n} a_ix^i  
-	$
-	que es la suma del coeficiente por la potencia de la indeterminada
+	¿What is a color?
 
 	\medskip
 
-	Ejemplos:
+	\begin{wrapfigure}{r}{0.5\textwidth} %this figure will be at the right
+		\includegraphics[width=0.5\textwidth]{skyblue}
+	\end{wrapfigure}
+
+	It is convenient for us, as we are involved with computers
+	and electronic screens, to define a color as an \textit{ordered triplet}
+	of integer numbers in the range from $0$ to $255$.
+	This convention is called the \textit{RGB color model}.
+	So $(98,186, 226)$ is the RGB representation of this beautiful
+	sky blue color.
 
 	\medskip
 
-	Un polinomio cúbico: $ a_3x^3+a_2x^2+a_1x^1+a_0x^0 $
-	
-	Un polinomio cuadrático: $ a_2x^2+a_1x^1+a_0x^0 $
-	
-	Un polinomio lineal: $a_1x^1+a_0x^0 $
+	And we say, for example, that $ \vec{b} = (98,186,216) $
+	is a color, an RGB color, the color $\vec{b}$.
 
-	En vez de $x^1$ decimos $x$ y en vez de $x^0$ decimos $1$
-	Como $a_0.1 = a_0$ no lo escribimos y decimos que el polinomio
-	lineal es $a_1x+a_0$  
-	
-	\medskip
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Color (RGB) regression application}
 
-	Pero, cuando lo pasamos a forma vectorial:
+	The components of a color then are in the range from 0 to 255.
 
-	$$y=a_1x^1+a_0x^0 = 
-		\begin{bmatrix} x^1 & x^0 \end{bmatrix}
-		\begin{bmatrix} a_1\\ a_0 \end{bmatrix}
-		=
-		\begin{bmatrix} x & 1 \end{bmatrix}
-		\begin{bmatrix} a_1\\ a_0 \end{bmatrix}
+	If we name $\mathbb{K}$ (as in \textit{K}olor) that \textit{integer range} then we have:
 	$$
-	
+		\mathbb{K} = \{ x | x \in \mathbb{Z} \land x \geqslant 0 \land x \leqslant 255 \}
+	$$
+
+	So $\mathbb{K}$ is our guy, a color have three components and these components
+	are in $\mathbb{K}$.
+
+	\medskip
+
+	NOTE: The components of $\mathbb{K}$ are also real numbers because they
+	belong to $\mathbb{K}$ and $\mathbb{K}$ is a subset of $\mathbb{Z}$ which is a subset of $\mathbb{R}$.
+	We'll make use of this property often.
+
+	\medskip
+
+	And now we know. A color is a vector in $\mathbb{K}^3$.
+
+	\medskip
+
+	And then the function (polynomial function) we are looking for
+	is from $\mathbb{K}^3$ to $\mathbb{K}^3$.
+
+}
+
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Color (RGB) regression application}
+
+	In this scenario we have a set of $k$ color pairs, $E$, where
+	each element of $E$ is an example of our desired mapping
+	of colors.
+	In other words: each pair $(\vec{\mu }, \vec{\nu}) $ in $E$ define a
+	desired mapping from color $\vec{\mu}$ to color $\vec{\nu}$.
+}
+
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Color (RGB) regression application}
+
+	Our mission, given that we chose to accept it, is to find a function
+	from $\mathbb{K}^3$ to $\mathbb{K}^3$ that resembles
+	as much as possible the given examples.
+
+	We now know how to do this. At least we know one way to
+	accomplish that task.
+
+	We must found a polynomial function from $\mathbb{K}^3$ to $\mathbb{K}^3$
+	that is the \textit{best fit} to our examples.
+
+	$$
+		v
+		=\begin{bmatrix}v_R \\ v_G \\ v_B\end{bmatrix}
+		=f\left(\begin{bmatrix} u_R \\ u_G \\ u_B \end{bmatrix}\right)
+	$$
+
+
+	A polynomial function from $\mathbb{K}^3$ to $\mathbb{K}^3$ are
+	actually three polynomial functions:
+
+	\medskip
+}
+% -------------------------------------------------------------------------
+\frame[t] {
+	\frametitle{Least squares}
+	\framesubtitle{Color (RGB) regression application}
+
+	As we define
+
+
+	then
+
+	$$
+		v
+	$$
+
 }
 % -------------------------------------------------------------------------
 \end{document}
